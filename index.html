@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hi babyyy hshhs💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* --- NEW PASSWORD STYLES --- */
+        #password-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #ffeef2 0%, #ffd9e3 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            border: 2px solid #ffccd5;
+        }
+
+        .login-card h2 {
+            font-family: 'Dancing Script', cursive;
+            color: #c9184a;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .login-card input {
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid #ffccd5;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin-bottom: 15px;
+            width: 220px;
+        }
+
+        .login-card button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .login-card button:hover {
+            background-color: #c9184a;
+            transform: scale(1.05);
+        }
+
+        /* --- ORIGINAL CSS STYLES START --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: linear-gradient(135deg, #ffeef2 0%, #ffe5ec 50%, #ffd9e3 100%);
+            font-family: 'Poppins', sans-serif;
+            color: #5a3d42;
+            overflow-x: hidden;
+            line-height: 1.8;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .background-decor {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; overflow: hidden; pointer-events: none;
+        }
+
+        .heart {
+            position: absolute; width: 20px; height: 20px;
+            background-color: #ff4d6d; transform: rotate(45deg);
+            opacity: 0.3; animation: float 12s linear forwards;
+        }
+
+        .heart::before, .heart::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            background-color: #ff4d6d; border-radius: 50%;
+        }
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { left: -10px; top: 0; }
+
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(45deg); opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+        }
+
+        .book-container {
+            width: 100%; max-width: 900px; margin: 20px auto;
+            text-align: center; animation: fadeIn 1.2s ease-in;
+            position: relative; padding-bottom: 40px;
+            display: none; /* Hidden until login */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: #c9184a; margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(201, 24, 74, 0.2);
+        }
+
+        .subtitle {
+            font-style: italic; color: #ff758f;
+            font-size: 1.2rem; margin-bottom: 20px;
+        }
+
+        .notebook {
+            background: #fff; width: 100%; min-height: 800px;
+            border-radius: 20px; box-shadow: 0 25px 60px rgba(255, 77, 109, 0.3);
+            position: relative; border: 1px solid #ffccd5; overflow: hidden;
+        }
+
+        .paper {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0;
+            background-color: white; padding: 60px 40px 80px 80px;
+            display: none; opacity: 0; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto; transform: translateX(20px);
+        }
+
+        .paper.active { display: block; opacity: 1; position: relative; transform: translateX(0); }
+
+        .lines {
+            position: absolute; top: 0; left: 65px; width: 2px; height: 100%;
+            background-color: #ffccd5; z-index: 1; border-left: 1px solid #ffccd5;
+        }
+
+        .paper::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(#f9f9f9 1px, transparent 1px);
+            background-size: 100% 32px; z-index: 0;
+        }
+
+        .content { position: relative; z-index: 2; text-align: left; font-size: 1.1rem; color: #4a4a4a; line-height: 32px; }
+        .salutation { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #ff4d6d; margin-bottom: 25px; font-weight: 700; }
+        .first-page-end { margin-top: 40px; color: #c9184a; font-style: italic; font-weight: 600; text-align: center; }
+
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 20px 0; }
+        .photo-frame { background: #fff; padding: 10px; border: 1px solid #eee; box-shadow: 0 8px 15px rgba(0,0,0,0.08); border-radius: 4px; transition: transform 0.4s ease; }
+        .photo-frame:nth-child(odd) { transform: rotate(-2deg); }
+        .photo-frame:nth-child(even) { transform: rotate(2deg); }
+        .photo-frame:hover { transform: rotate(0deg) scale(1.05); z-index: 10; box-shadow: 0 12px 25px rgba(201, 24, 74, 0.2); }
+
+        .image-placeholder {
+            width: 100%; height: 220px; background: #fffafa; border: 2px dashed #ffccd5;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; color: #ff758f; border-radius: 4px; overflow: hidden;
+        }
+
+        .image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        .signature-block { margin-top: 40px; text-align: right; padding-right: 20px; }
+        .signature { font-family: 'Dancing Script', cursive; font-size: 2rem; color: #c9184a; line-height: 1.2; margin-top: 10px; }
+        .page-footer { padding-top: 30px; display: flex; justify-content: flex-end; align-items: center; }
+        .next-btn, .prev-btn { background-color: #fff0f3; border: 1.5px solid #ff4d6d; color: #c9184a; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; transition: 0.3s; }
+        .next-btn:hover, .prev-btn:hover { background-color: #ff4d6d; color: white; }
+        .heart-divider { font-size: 1.5rem; margin: 20px 0; text-align: center; }
+
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .paper { padding: 40px 20px 60px 50px; }
+            .lines { left: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="password-overlay">
+        <div class="login-card">
+            <h2>Hello, My Love 💕</h2>
+            <p style="margin-bottom: 15px; font-size: 0.9rem;">Enter the secret password to enter</p>
+            <input type="password" id="passwordInput" placeholder="Sikretong malupit...">
+            <br>
+            <button onclick="checkPassword()">Open My Heart</button>
+            <p id="error-msg" style="color: #ff4d6d; margin-top: 10px; font-size: 0.8rem; display: none;">Oops! Mali baby, try again hshs</p>
+        </div>
+    </div>
+
+    <audio id="music-login" loop>
+        <source src="old_love.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="music-main" loop>
+        <source src="hanap_hanap.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="background-decor" id="heartContainer"></div>
+
+    <div class="book-container" id="main-content">
+        <header>
+            <h1>💕 Happy 10th Monthsary Babyyy Vail koo hshsh 💕</h1>
+            <p class="subtitle">Ten Months of pangungulit ko sayo natis mo hahhaa</p>
+        </header>
+
+        <div class="notebook">
+            <div class="paper active" id="page-1">
+                <div class="lines"></div>
+                <div class="content">
+                    <p class="salutation">My one and only wifeyy haha,</p>
+                    <p>Happy 10th Month po mahalll, I wanted to write and make this haha, oo sumobra ata effort ko para makabawi for you, this is something real and from the heart because, honestly, i really want to make up with u sa lahat ng kulang ko</p>
+                    <p>SO YEAH hahaha, salamt po dahil u are willing to stay by my side for ten months now, even when I dont make it easy to stay. Looking back at everything, I realized na ang dami kong pagkukulang sayo recently. I am truly sorry for treating you badly at times and for making you feel like youre not a priority. Alam kong nararamdaman mo yung coldness well not totally cold, less chats lang or yung distance po, especially when I get buried in acads. Sobrang nakaka drain yung school, and I hate that I let that stress bleed into our relationship. Minsan nawawalan na ako ng oras sayo, and I know how much that hurts.</p>
+                    <p>Im also sorry for being so closed off. Alam ko na napapansin mo kapag may problema ako, but instead of leaning on you, I choose to stay silent. I don't share whats bothering me even when Im down, and I realize now that it makes you feel left out—like I don't trust you enough to carry the burden with me. To be honest, Im just overwhelmed with so many problems lately, and I didn't want to pass that energy to you. But I see now that by trying to protect you from my mood, I ended up pushing you away.</p>
+                    <p>Despite all the tampuhan, the misunderstandings, and my inconsistencies, hinding hindi nagbabago yung pagmamahal ko sayo. If anything, it grows every time I see how patient you are with me. Thank you for not giving up on me and for choosing to stay even when Im at my worst. Hindi tayo maghihiwalay, promise yan. I will do my best to manage my time better and to be the man you deserve.</p>
+                    <p class="first-page-end">You are my safe place, and I am so lucky to have you. I love you more than words can say. I mean just look at this goddess wahahaha</p>
+                    <div class="page-footer">
+                        <span class="page-number">1 / 3</span>
+                        <button class="next-btn" onclick="nextPage()">LOOK HOW PRETTY U ARE →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper" id="page-2">
+                <div class="lines"></div>
+                <div class="content">
+                    <h2 class="page-title">Look Gaano Ka Kaganda</h2>
+                    <p class="gallery-intro">Every picture here isss SOOOOO jabsdbasdf</p>
+                    
+                    <div class="gallery-grid">
+                        <div class="photo-frame">
+                            <div class="image-placeholder">
+                                <img src="pic1.jpg" alt="Memory 1" onerror="this.style.display='none'">
+                                <span>📸 ganda</span>
+                            </div>
+                        </div>
+                        <div class="photo-frame">
+                            <div class="image-placeholder">
+                                <img src="pic2.jpg" alt="Memory 2" onerror="this.style.display='none'">
+                                <span>✨ cute</span>
+                            </div>
+                        </div>
+                        <div class="photo-frame">
+                            <div class="image-placeholder">
+                                <img src="pic3.jpg" alt="Memory 3" onerror="this.style.display='none'">
+                                <span>😊 hot</span>
+                            </div>
+                        </div>
+                        <div class="photo-frame">
+                            <div class="image-placeholder">
+                                <img src="pic4.jpg" alt="Memory 4" onerror="this.style.display='none'">
+                                <span>👩‍❤️‍👨 nakakatunaw</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer" style="justify-content: space-between;">
+                        <button class="prev-btn" onclick="prevPage()">← Back</button>
+                        <span class="page-number">2 / 3</span>
+                        <button class="next-btn" onclick="nextPage()">Final Note →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paper" id="page-3">
+                <div class="lines"></div>
+                <div class="content">
+                    <div class="heart-divider">💕</div>
+                    <p>Vail, Babbyy, honestly, words really aren't enough to capture how much I love you. Its a feeling that fills up my whole mee like the me me, constant, and sometimes so overwhelming that I don't know how to put it into a single sentence. I love you with a completeness that surprises me every day. Its a kind of love that doesnt just sit still, but grows deeper yk, like to the point na everytime na u do something i will find myself loving u more anddd anoo...bastaaa i can't express this, loving u is making me speechless hahaha</p>
+                    <p>I promise to keep choosing you, over and over, without hesitation. I promise to really listen and not just to your words, but to the things you don't say and to grow alongside you as we enjoy whatever life throws our way. I want to be the person you can always run to, the one who holds your hand when things get heavy and the first person you want to tell your wins to. I am so lucky to be yours.</p>
+                    
+                    <div class="signature-block">
+                        <p>With all my love,</p>
+                        <p class="signature">Forever Yours, <br>Shanmyx ❤️</p>
+                    </div>
+
+                    <div class="page-footer" style="justify-content: flex-start;">
+                        <button class="prev-btn" onclick="prevPage()">← Back to Gallery</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">Happy 10th Monthsary, Vail! I love you always. 💕</p>
+        </footer>
+    </div>
+
+    <script>
+        // Password Logic and Music Switching
+        const loginMusic = document.getElementById('music-login');
+        const mainMusic = document.getElementById('music-main');
+
+        // Start "Old Love" as soon as they interact
+        window.addEventListener('click', () => {
+            if(loginMusic.paused && document.getElementById('password-overlay').style.display !== 'none') {
+                loginMusic.play();
+            }
+        }, { once: true });
+
+        function checkPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            const error = document.getElementById('error-msg');
+            
+            if (pass.toLowerCase() === "vailgrace") {
+                // Hide overlay
+                document.getElementById('password-overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('password-overlay').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    
+                    // Switch Music
+                    loginMusic.pause();
+                    mainMusic.play();
+                }, 800);
+            } else {
+                error.style.display = 'block';
+                document.getElementById('passwordInput').value = "";
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('passwordInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') checkPassword();
+        });
+
+        // Background Hearts Generation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 7) + 's';
+            heart.style.opacity = Math.random() * 0.4 + 0.2;
+            const size = (Math.random() * 15 + 10) + 'px';
+            heart.style.width = size;
+            heart.style.height = size;
+            document.getElementById('heartContainer').appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 10000);
+        }
+        setInterval(createHeart, 600);
+        
+        // Page Navigation Logic
+        let currentPage = 1;
+        const totalPages = 3;
+
+        function showPage(pageNumber) {
+            const pages = document.querySelectorAll('.paper');
+            pages.forEach(page => {
+                page.style.display = 'none';
+                page.classList.remove('active');
+            });
+            
+            const activePage = document.getElementById(`page-${pageNumber}`);
+            activePage.style.display = 'block';
+            
+            setTimeout(() => {
+                activePage.classList.add('active');
+            }, 10);
+
+            currentPage = pageNumber;
+            activePage.scrollTop = 0;
+        }
+
+        function nextPage() { if (currentPage < totalPages) showPage(currentPage + 1); }
+        function prevPage() { if (currentPage > 1) showPage(currentPage - 1); }
+    </script>
+</body>
+</html>
